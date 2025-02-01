@@ -28,12 +28,10 @@ export const createFundingSource = async (
   options: CreateFundingSourceOptions
 ) => {
   try {
-    return await dwollaClient
-      .post(`customers/${options.customerId}/funding-sources`, {
+    return await dwollaClient.post(`customers/${options.customerId}/funding-sources`, {
         name: options.fundingSourceName,
         plaidToken: options.plaidToken,
-      })
-      .then((res) => res.headers.get("location"));
+      }).then((res) => res.headers.get("location"));
   } catch (err) {
     console.error("Creating a Funding Source Failed: ", err);
   }
@@ -80,12 +78,10 @@ export const createTransfer = async ({
       },
       amount: {
         currency: "USD",
-        value: amount,
+        value: amount,  
       },
     };
-    return await dwollaClient
-      .post("transfers", requestBody)
-      .then((res) => res.headers.get("location"));
+    return await dwollaClient.post("transfers", requestBody).then((res) => res.headers.get("location"));
   } catch (err) {
     console.error("Transfer fund failed: ", err);
   }
