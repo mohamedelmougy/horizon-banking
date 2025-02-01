@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import type { Metadata } from "next";
 import { Geist,IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
