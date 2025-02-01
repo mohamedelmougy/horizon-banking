@@ -6,8 +6,9 @@ import React from "react";
 
 const MyBanks = async () => {
   const loggedIn = await getLoggedInUser();
-  const userId = loggedIn["$id"];
-  const accounts = await getAccounts({ userId });
+  const accounts = await getAccounts({ 
+    userId: loggedIn?.$id 
+  })
 
   return (
     <section className='flex'>

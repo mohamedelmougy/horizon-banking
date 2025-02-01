@@ -5,13 +5,14 @@ import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react'
 
 const PaymentTransfer =async () => {
-   const loggedIn = await getLoggedInUser();
-    const userId = loggedIn["$id"]
-    const accounts = await getAccounts({ userId });
+  const loggedIn = await getLoggedInUser();
+  const accounts = await getAccounts({ 
+    userId: loggedIn?.$id 
+  })
+
+  if(!accounts) return;
   
-    if (!accounts) return;
-  
-    const accountsData = accounts?.data;
+  const accountsData = accounts?.data;
   return (
     <section className='payment-transfer'>
         <HeaderBox

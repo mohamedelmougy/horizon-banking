@@ -9,7 +9,8 @@ const geistSans = Geist({
 const ibmPlexSerif = IBM_Plex_Serif({
   variable:"--font-ibm-font-serif",
   subsets:["latin"],
-  weight:['400',"700"]
+  weight:['400',"700"],
+  preload:false
 })
 
 
