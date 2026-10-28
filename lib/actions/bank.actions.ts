@@ -149,18 +149,20 @@ export const getTransactions = async ({
   accessToken,
 }: getTransactionsProps) => {
   let hasMore = true;
-  let transactions: any = [];
+  let cursor: string | undefined;
+  const transactions = [];
 
   try {
     // Iterate through each page of new transaction updates for item
     while (hasMore) {
       const response = await plaidClient.transactionsSync({
         access_token: accessToken,
+        cursor,
       });
 
       const data = response.data;
 
-      transactions = response.data.added.map((transaction) => ({
+      transactions.push(...data.added.map((transaction) => ({
         id: transaction.transaction_id,
         name: transaction.name,
         paymentChannel: transaction.payment_channel,
@@ -171,8 +173,9 @@ export const getTransactions = async ({
         category: transaction.category ? transaction.category[0] : "",
         date: transaction.date,
         image: transaction.logo_url,
-      }));
+      })));
 
+      cursor = data.next_cursor;
       hasMore = data.has_more;
     }
 
