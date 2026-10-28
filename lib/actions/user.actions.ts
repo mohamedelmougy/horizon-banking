@@ -37,7 +37,7 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
 
 export const signIn = async ({ email, password }: signInProps) => {
   try {
-    const { account } = await createSessionClient();
+    const { account } = await createAdminClient();
 
     const session = await account.createEmailPasswordSession(email, password);
 
